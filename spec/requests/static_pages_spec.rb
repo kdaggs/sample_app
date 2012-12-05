@@ -10,15 +10,8 @@ describe "Static pages" do
     it { should have_selector('h1',    text: 'Sample App') }
     it { should have_selector('title', text: full_title('')) }
     it { should_not have_selector 'title', text: '| Home' }
-  end
 
-  describe "Help page" do
-    before { visit help_path }
-
-    it { should have_selector('h1',    text: 'Help') }
-    it { should have_selector('title', text: full_title('Help')) }
-    
-    describe "for signed-in users" do
+     describe "for signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
@@ -44,6 +37,15 @@ describe "Static pages" do
         it { should have_link("1 followers", href: followers_user_path(user)) }
       end
     end
+  end
+
+  describe "Help page" do
+    before { visit help_path }
+
+    it { should have_selector('h1',    text: 'Help') }
+    it { should have_selector('title', text: full_title('Help')) }
+    
+   
   end
 
   describe "About page" do
